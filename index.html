@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mohamed and Robin Technology Services</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Inter:wght@300;400;500;600&family=Noto+Sans+Ethiopic:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --orange: #E8650A;
+    --orange-dark: #C4520A;
+    --orange-light: #FF7A20;
+    --orange-bg: #FFF4ED;
+    --dark: #111111;
+    --dark-2: #1C1C1C;
+    --gray-1: #F5F5F5;
+    --gray-2: #EBEBEB;
+    --gray-3: #D4D4D4;
+    --gray-text: #6B6B6B;
+    --white: #FFFFFF;
+    --text: #111111;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Inter', sans-serif; background: var(--white); color: var(--text); overflow-x: hidden; }
+  .am { font-family: 'Noto Sans Ethiopic', sans-serif; }
+
+  /* LANG BAR */
+  .lang-bar {
+    background: var(--dark-2); color: rgba(255,255,255,0.6);
+    padding: 0 5%; height: 36px;
+    display: flex; align-items: center; justify-content: flex-end; gap: 6px;
+    font-size: 0.78rem;
+  }
+  .lang-bar span { color: rgba(255,255,255,0.35); font-size: 0.7rem; }
+  .lang-btn {
+    background: none; border: 1px solid rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.6); padding: 3px 12px; border-radius: 100px;
+    font-size: 0.75rem; cursor: pointer; transition: all 0.2s;
+    font-family: inherit;
+  }
+  .lang-btn.active {
+    background: var(--orange); border-color: var(--orange);
+    color: white; font-weight: 600;
+  }
+  .lang-btn:not(.active):hover { border-color: rgba(255,255,255,0.35); color: white; }
+  .lang-btn.am-btn { font-family: 'Noto Sans Ethiopic', sans-serif; font-size: 0.78rem; }
+
+  /* NAV */
+  nav {
+    position: sticky; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 5%; height: 64px;
+    background: rgba(255,255,255,0.97);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-2);
+  }
+  .nav-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .nav-logo-icon {
+    width: 44px; height: 44px; border-radius: 10px; background: var(--orange);
+    display: flex; align-items: center; justify-content: center;
+    font-family: 'Syne', sans-serif; font-weight: 800; font-size: 20px; color: white;
+  }
+  .nav-logo-text { font-family: 'Syne', sans-serif; font-size: 1.15rem; font-weight: 800; color: var(--dark); line-height: 1.2; }
+  .nav-logo-text span { display: block; font-size: 0.72rem; font-weight: 500; color: var(--gray-text); letter-spacing: 1.5px; text-transform: uppercase; }
+  .nav-links { display: flex; gap: 2rem; list-style: none; }
+  .nav-links a { color: var(--gray-text); text-decoration: none; font-size: 0.88rem; font-weight: 500; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--orange); }
+  .nav-cta {
+    background: var(--orange); color: white;
+    padding: 0.5rem 1.3rem; border-radius: 8px;
+    text-decoration: none; font-size: 0.86rem; font-weight: 600;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange-dark); }
+
+  /* HERO */
+  .hero { display: flex; align-items: center; padding: 2.5rem 5%; background: var(--white); }
+  .hero-inner { max-width: 1200px; margin: 0 auto; width: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 7px;
+    background: var(--orange-bg); border: 1px solid rgba(232,101,10,0.2);
+    padding: 0.35rem 0.9rem; border-radius: 100px;
+    font-size: 0.75rem; font-weight: 600; color: var(--orange);
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 1.2rem;
+  }
+  .hero-badge::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: var(--orange); }
+  .hero h1 { font-family: 'Syne', sans-serif; font-size: clamp(2rem, 3.5vw, 3.2rem); font-weight: 800; line-height: 1.12; color: var(--dark); margin-bottom: 1.3rem; }
+  .hero h1 em { font-style: normal; color: var(--orange); }
+  .hero p { font-size: 1rem; line-height: 1.75; color: var(--gray-text); margin-bottom: 2.2rem; max-width: 460px; }
+  .hero-btns { display: flex; gap: 0.9rem; flex-wrap: wrap; }
+  .btn-primary { background: var(--orange); color: white; padding: 0.8rem 1.8rem; border-radius: 8px; font-size: 0.92rem; font-weight: 600; text-decoration: none; transition: all 0.2s; }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+  .btn-outline { border: 1.5px solid var(--gray-2); color: var(--dark); padding: 0.8rem 1.8rem; border-radius: 8px; font-size: 0.92rem; font-weight: 500; text-decoration: none; transition: all 0.2s; background: white; }
+  .btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+  .hero-right { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .h-card { background: var(--gray-1); border-radius: 16px; padding: 1.4rem; border: 1px solid var(--gray-2); transition: all 0.25s; }
+  .h-card:hover { background: white; box-shadow: 0 4px 24px rgba(0,0,0,0.07); transform: translateY(-3px); }
+  .h-card:first-child { grid-column: 1/-1; background: var(--orange-bg); border-color: rgba(232,101,10,0.15); }
+  .h-card-icon { font-size: 26px; margin-bottom: 0.8rem; }
+  .h-card h3 { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; color: var(--dark); margin-bottom: 0.35rem; }
+  .h-card p { font-size: 0.8rem; color: var(--gray-text); line-height: 1.55; }
+
+  /* STATS */
+  .stats { background: var(--orange); padding: 1.5rem 5%; }
+  .stats-inner { display: flex; justify-content: center; gap: 5rem; flex-wrap: wrap; max-width: 1200px; margin: 0 auto; }
+  .stat-item { text-align: center; color: white; }
+  .stat-item .num { font-family: 'Syne', sans-serif; font-size: 2rem; font-weight: 800; }
+  .stat-item .lbl { font-size: 0.8rem; opacity: 0.85; margin-top: 2px; }
+
+  /* SECTION */
+  section { padding: 3rem 5%; }
+  .sec-max { max-width: 1200px; margin: 0 auto; }
+  .sec-tag { font-size: 0.72rem; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--orange); margin-bottom: 0.6rem; }
+  .sec-title { font-family: 'Syne', sans-serif; font-size: clamp(1.7rem, 2.8vw, 2.4rem); font-weight: 800; color: var(--dark); line-height: 1.15; margin-bottom: 0.8rem; }
+  .sec-sub { color: var(--gray-text); font-size: 0.97rem; line-height: 1.75; max-width: 520px; }
+  .sec-head { margin-bottom: 1.5rem; }
+
+  /* SERVICES */
+  .services { background: var(--gray-1); }
+  .srv-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 1.2rem; }
+  .srv-card { background: var(--white); border-radius: 14px; padding: 1.8rem; border: 1px solid var(--gray-2); transition: all 0.25s; }
+  .srv-card:hover { box-shadow: 0 4px 28px rgba(0,0,0,0.08); transform: translateY(-4px); border-color: rgba(232,101,10,0.2); }
+  .srv-icon { width: 48px; height: 48px; border-radius: 12px; background: var(--orange-bg); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 1rem; }
+  .srv-card h3 { font-family: 'Syne', sans-serif; font-size: 1rem; font-weight: 700; color: var(--dark); margin-bottom: 0.5rem; }
+  .srv-card p { font-size: 0.85rem; color: var(--gray-text); line-height: 1.65; margin-bottom: 1rem; }
+  .srv-list { list-style: none; display: flex; flex-direction: column; gap: 5px; }
+  .srv-list li { font-size: 0.82rem; color: #444; display: flex; align-items: center; gap: 7px; }
+  .srv-list li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+
+  /* WHY */
+  .why { background: var(--white); }
+  .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
+  .why-list { display: flex; flex-direction: column; gap: 1rem; }
+  .why-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .why-num { width: 36px; height: 36px; border-radius: 9px; flex-shrink: 0; background: var(--orange-bg); border: 1px solid rgba(232,101,10,0.15); display: flex; align-items: center; justify-content: center; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 0.85rem; color: var(--orange); }
+  .why-item h4 { font-weight: 600; font-size: 0.95rem; color: var(--dark); margin-bottom: 0.25rem; }
+  .why-item p { font-size: 0.85rem; color: var(--gray-text); line-height: 1.6; }
+  .why-panel { background: var(--gray-1); border-radius: 20px; padding: 2rem; border: 1px solid var(--gray-2); }
+  .why-panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+  .why-stat { background: white; border-radius: 12px; padding: 1.2rem; text-align: center; border: 1px solid var(--gray-2); }
+  .why-stat .big { font-family: 'Syne', sans-serif; font-size: 1.9rem; font-weight: 800; color: var(--orange); }
+  .why-stat .sm { font-size: 0.75rem; color: var(--gray-text); margin-top: 2px; }
+  .why-quote { font-family: 'Syne', sans-serif; font-size: 0.95rem; font-weight: 700; text-align: center; color: var(--dark); padding-top: 0.5rem; border-top: 1px solid var(--gray-2); }
+
+  /* CONTACT */
+  .contact { background: var(--gray-1); }
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; }
+  .cinfo { display: flex; flex-direction: column; gap: 1.3rem; }
+  .cinfo-item { display: flex; gap: 1rem; align-items: flex-start; }
+  .cinfo-icon { width: 44px; height: 44px; border-radius: 10px; flex-shrink: 0; background: var(--orange-bg); border: 1px solid rgba(232,101,10,0.15); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .cinfo-item h4 { font-size: 0.72rem; font-weight: 700; color: var(--gray-text); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 3px; }
+  .cinfo-item p, .cinfo-item a { font-size: 1rem; color: var(--dark); text-decoration: none; font-weight: 500; }
+  .cinfo-item a:hover { color: var(--orange); }
+  .cform { display: flex; flex-direction: column; gap: 0.9rem; background: white; padding: 2rem; border-radius: 16px; border: 1px solid var(--gray-2); }
+  .cform-row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem; }
+  .cform input, .cform textarea { background: var(--gray-1); border: 1px solid var(--gray-2); border-radius: 9px; padding: 0.75rem 1rem; color: var(--dark); font-family: 'Inter', sans-serif; font-size: 0.9rem; width: 100%; outline: none; resize: none; transition: border-color 0.2s; }
+  .cform input:focus, .cform textarea:focus { border-color: var(--orange); background: white; }
+  .cform input::placeholder, .cform textarea::placeholder { color: #aaa; }
+  .cform textarea { min-height: 100px; }
+  .cform button { background: var(--orange); color: white; border: none; cursor: pointer; padding: 0.85rem; border-radius: 9px; font-size: 0.92rem; font-weight: 600; font-family: 'Inter', sans-serif; transition: all 0.2s; }
+  .cform button:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+  /* FOOTER */
+  footer { background: var(--dark-2); color: white; padding: 2.5rem 5% 1.5rem; }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 2rem; margin-bottom: 1.5rem; max-width: 1200px; margin-left: auto; margin-right: auto; padding-bottom: 1.5rem; border-bottom: 1px solid rgba(255,255,255,0.08); }
+  .footer-brand p { color: rgba(255,255,255,0.45); font-size: 0.86rem; line-height: 1.75; margin: 0.9rem 0 1.2rem; max-width: 300px; }
+  .f-phone a { color: #FFB07A; text-decoration: none; font-weight: 600; font-size: 0.95rem; display: block; margin-bottom: 4px; }
+  footer h5 { font-family: 'Syne', sans-serif; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; color: rgba(255,255,255,0.4); margin-bottom: 1rem; }
+  footer ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  footer ul a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 0.87rem; transition: color 0.2s; }
+  footer ul a:hover { color: #FFB07A; }
+  .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; max-width: 1200px; margin: 0 auto; }
+  .footer-bottom p { color: rgba(255,255,255,0.25); font-size: 0.8rem; }
+
+  /* Amharic overrides */
+  body.lang-am, body.lang-am .nav-links a, body.lang-am .hero h1,
+  body.lang-am .sec-title, body.lang-am .srv-card h3, body.lang-am .why-item h4,
+  body.lang-am .h-card h3, body.lang-am .why-quote {
+    font-family: 'Noto Sans Ethiopic', sans-serif;
+  }
+  body.lang-am .hero h1 { font-size: clamp(1.7rem, 3vw, 2.8rem); line-height: 1.3; }
+  body.lang-am .sec-title { font-size: clamp(1.5rem, 2.5vw, 2.1rem); }
+
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .hero-inner, .why-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .cform-row { grid-template-columns: 1fr; }
+    .stats-inner { gap: 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- LANGUAGE BAR -->
+<div class="lang-bar">
+  <span>🌐</span>
+  <button class="lang-btn active" id="btn-en" onclick="setLang('en')">English</button>
+  <button class="lang-btn am-btn" id="btn-am" onclick="setLang('am')">አማርኛ</button>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">
+    <div class="nav-logo-icon">R</div>
+    <div class="nav-logo-text">
+      Mohamed & Robin
+      <span data-en="Technology Services" data-am="የቴክኖሎጂ አገልግሎቶች">Technology Services</span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" data-en="Services" data-am="አገልግሎቶች">Services</a></li>
+    <li><a href="#why" data-en="Why Us" data-am="ለምን እኛ">Why Us</a></li>
+    <li><a href="#contact" data-en="Contact" data-am="ያግኙን">Contact</a></li>
+  </ul>
+  <a href="tel:0933609978" class="nav-cta" data-en="📞 Call Now" data-am="📞 አሁን ይደውሉ">📞 Call Now</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-inner">
+    <div>
+      <div class="hero-badge" data-en="Trusted Tech Experts" data-am="የታመኑ የቴክ ባለሙያዎች">Trusted Tech Experts</div>
+      <h1 data-en="Repair, Sales &amp;<br><em>Tech Solutions</em><br>You Can Trust" data-am="ጥገና፣ ሽያጭ እና<br><em>የቴክ መፍትሄዎች</em><br>መታመን የሚችሉ">Repair, Sales &amp;<br><em>Tech Solutions</em><br>You Can Trust</h1>
+      <p data-en="From CCTV installation to computer repair and printer maintenance — Mohamed and Robin Technology Services keeps your business running smoothly." data-am="ከ CCTV ጭነት እስከ ኮምፒዩተር ጥገና እና የፕሪንተር ጥገና — ሙሐመድ እና ሮቢን የቴክኖሎጂ አገልግሎቶች ስራዎን ያለምንም እንቅፋት ያሄዳሉ።">From CCTV installation to computer repair and printer maintenance — Mohamed and Robin Technology Services keeps your business running smoothly.</p>
+      <div class="hero-btns">
+        <a href="#contact" class="btn-primary" data-en="Get a Free Quote →" data-am="ነፃ ግምት ያግኙ →">Get a Free Quote →</a>
+        <a href="tel:0933609978" class="btn-outline">📞 0933 609 978</a>
+      </div>
+    </div>
+    <div class="hero-right">
+      <div class="h-card">
+        <div class="h-card-icon">📷</div>
+        <h3 data-en="CCTV & Security Systems" data-am="CCTV እና የደህንነት ስርዓቶች">CCTV & Security Systems</h3>
+        <p data-en="Professional installation and maintenance of surveillance systems for homes and businesses." data-am="ለቤቶች እና ለንግድ ቦታዎች የክትትል ስርዓቶችን ሙያዊ ጭነት እና ጥገና።">Professional installation and maintenance of surveillance systems for homes and businesses.</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">💻</div>
+        <h3 data-en="Computer Sales & Repair" data-am="የኮምፒዩተር ሽያጭ እና ጥገና">Computer Sales & Repair</h3>
+        <p data-en="Hardware, software, and full system diagnostics." data-am="ሃርድዌር፣ ሶፍትዌር እና ሙሉ የስርዓት ምርመራ።">Hardware, software, and full system diagnostics.</p>
+      </div>
+      <div class="h-card">
+        <div class="h-card-icon">🖨️</div>
+        <h3 data-en="Printer Services" data-am="የፕሪንተር አገልግሎቶች">Printer Services</h3>
+        <p data-en="Repair, toner, and copier solutions." data-am="ጥገና፣ ቶነር እና ፎቶ ኮፒ መፍትሄዎች።">Repair, toner, and copier solutions.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats">
+  <div class="stats-inner">
+    <div class="stat-item"><div class="num">500+</div><div class="lbl" data-en="Clients Served" data-am="የተደገፉ ደንበኞች">Clients Served</div></div>
+    <div class="stat-item"><div class="num">10+</div><div class="lbl" data-en="Years Experience" data-am="ዓመታት ልምድ">Years Experience</div></div>
+    <div class="stat-item"><div class="num">24/7</div><div class="lbl" data-en="Support Available" data-am="ድጋፍ ይገኛል">Support Available</div></div>
+    <div class="stat-item"><div class="num">100%</div><div class="lbl" data-en="Satisfaction Goal" data-am="የእርካታ ግብ">Satisfaction Goal</div></div>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section class="services" id="services">
+  <div class="sec-max">
+    <div class="sec-head">
+      <div class="sec-tag" data-en="What We Offer" data-am="የምናቀርበው">What We Offer</div>
+      <h2 class="sec-title" data-en="Our Core Services" data-am="ዋና አገልግሎቶቻችን">Our Core Services</h2>
+      <p class="sec-sub" data-en="Comprehensive technology solutions for individuals and businesses — repair, installation, and sales under one roof." data-am="ለግለሰቦች እና ለንግድ ተቋማት ሁሉን አቀፍ የቴክኖሎጂ መፍትሄዎች — ጥገና፣ ጭነት እና ሽያጭ አንድ ቦታ።">Comprehensive technology solutions for individuals and businesses — repair, installation, and sales under one roof.</p>
+    </div>
+    <div class="srv-grid">
+      <div class="srv-card">
+        <div class="srv-icon">📷</div>
+        <h3 data-en="CCTV & Security Systems" data-am="CCTV እና የደህንነት ስርዓቶች">CCTV & Security Systems</h3>
+        <p data-en="Complete surveillance solutions from supply to installation and maintenance." data-am="ከአቅርቦት እስከ ጭነት እና ጥገና ሙሉ የክትትል መፍትሄዎች።">Complete surveillance solutions from supply to installation and maintenance.</p>
+        <ul class="srv-list">
+          <li data-en="IP & Analog Camera Installation" data-am="IP እና አናሎግ ካሜራ ጭነት">IP & Analog Camera Installation</li>
+          <li data-en="DVR / NVR Setup" data-am="DVR / NVR ማዋቀር">DVR / NVR Setup</li>
+          <li data-en="Remote Viewing Configuration" data-am="የርቀት ዕይታ ማዋቀር">Remote Viewing Configuration</li>
+          <li data-en="System Troubleshooting" data-am="የስርዓት ችግር ፈታ">System Troubleshooting</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">💻</div>
+        <h3 data-en="Computer Sales & Repair" data-am="የኮምፒዩተር ሽያጭ እና ጥገና">Computer Sales & Repair</h3>
+        <p data-en="New and refurbished computers, plus expert repair for all brands." data-am="አዲስ እና ታደሱ ኮምፒዩተሮች፣ ለሁሉም ብራንዶች ሙያዊ ጥገና።">New and refurbished computers, plus expert repair for all brands.</p>
+        <ul class="srv-list">
+          <li data-en="Desktop & Laptop Repair" data-am="ዴስክቶፕ እና ላፕቶፕ ጥገና">Desktop & Laptop Repair</li>
+          <li data-en="OS Installation & Recovery" data-am="OS ጭነት እና ማገገሚያ">OS Installation & Recovery</li>
+          <li data-en="Hardware Upgrades" data-am="ሃርድዌር ማሻሻያ">Hardware Upgrades</li>
+          <li data-en="Virus Removal & Cleanup" data-am="ቫይረስ ማስወገድ እና ጽዳት">Virus Removal & Cleanup</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">🖨️</div>
+        <h3 data-en="Printer & Copier Services" data-am="የፕሪንተር እና ፎቶኮፒ አገልግሎቶች">Printer & Copier Services</h3>
+        <p data-en="Repair and maintenance for all major printer brands." data-am="ለሁሉም ዋና ዋና የፕሪንተር ብራንዶች ጥገና እና ጥገና።">Repair and maintenance for all major printer brands.</p>
+        <ul class="srv-list">
+          <li data-en="Inkjet & Laser Printer Repair" data-am="Inkjet እና Laser ፕሪንተር ጥገና">Inkjet & Laser Printer Repair</li>
+          <li data-en="Toner & Cartridge Supply" data-am="ቶነር እና ካርትሪጅ አቅርቦት">Toner & Cartridge Supply</li>
+          <li data-en="Copier Servicing" data-am="ፎቶኮፒ አገልግሎት">Copier Servicing</li>
+          <li data-en="Network Printer Setup" data-am="የኔትወርክ ፕሪንተር ማዋቀር">Network Printer Setup</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">🔌</div>
+        <h3 data-en="Networking Solutions" data-am="የኔትወርክ መፍትሄዎች">Networking Solutions</h3>
+        <p data-en="Fast, reliable network infrastructure for offices and businesses." data-am="ለቢሮዎች እና ለንግድ ቦታዎች ፈጣን እና አስተማማኝ የኔትወርክ መሠረተ ልማት።">Fast, reliable network infrastructure for offices and businesses.</p>
+        <ul class="srv-list">
+          <li data-en="LAN / Wi-Fi Setup" data-am="LAN / Wi-Fi ማዋቀር">LAN / Wi-Fi Setup</li>
+          <li data-en="Router & Switch Config" data-am="ራውተር እና ስዊች ውቅር">Router & Switch Config</li>
+          <li data-en="Cable Management" data-am="የኬብል አስተዳደር">Cable Management</li>
+          <li data-en="Network Troubleshooting" data-am="የኔትወርክ ችግር ፈታ">Network Troubleshooting</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">🔧</div>
+        <h3 data-en="Hardware & Accessories" data-am="ሃርድዌር እና መለዋወጫዎች">Hardware & Accessories</h3>
+        <p data-en="Genuine parts and accessories for computers, printers, and security systems." data-am="ለኮምፒዩተሮች፣ ፕሪንተሮች እና የደህንነት ስርዓቶች ዋና ዋና ክፍሎች እና መለዋወጫዎች።">Genuine parts and accessories for computers, printers, and security systems.</p>
+        <ul class="srv-list">
+          <li data-en="RAM, SSD, HDD Supply" data-am="RAM, SSD, HDD አቅርቦት">RAM, SSD, HDD Supply</li>
+          <li data-en="Keyboards, Mice, Cables" data-am="ኪቦርዶች፣ ማዋሻዎች፣ ኬብሎች">Keyboards, Mice, Cables</li>
+          <li data-en="UPS & Power Solutions" data-am="UPS እና የኃይል መፍትሄዎች">UPS & Power Solutions</li>
+          <li data-en="CCTV Cameras & DVRs" data-am="CCTV ካሜራዎች እና DVRs">CCTV Cameras & DVRs</li>
+        </ul>
+      </div>
+      <div class="srv-card">
+        <div class="srv-icon">🛡️</div>
+        <h3 data-en="IT Support & Maintenance" data-am="የIT ድጋፍ እና ጥገና">IT Support & Maintenance</h3>
+        <p data-en="Ongoing IT support contracts for businesses needing reliable technical assistance." data-am="ለተለያዩ ንግዶች አስተማማኝ የቴክኒካዊ ድጋፍ ቀጣይ የIT ስምምነቶች።">Ongoing IT support contracts for businesses needing reliable technical assistance.</p>
+        <ul class="srv-list">
+          <li data-en="Scheduled Maintenance Plans" data-am="የታቀዱ የጥገና እቅዶች">Scheduled Maintenance Plans</li>
+          <li data-en="On-Site Support" data-am="በቦታው ድጋፍ">On-Site Support</li>
+          <li data-en="Software Licensing Help" data-am="የሶፍትዌር ፈቃድ እርዳታ">Software Licensing Help</li>
+          <li data-en="Data Backup Solutions" data-am="የዳታ ምትኬ መፍትሄዎች">Data Backup Solutions</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="sec-max">
+    <div class="why-grid">
+      <div>
+        <div class="sec-tag" data-en="Why Choose Us" data-am="ለምን እኛን ይምረጡ">Why Choose Us</div>
+        <h2 class="sec-title" data-en="Experienced, Reliable & Local" data-am="ልምድ ያለው፣ አስተማማኝ እና አካባቢያዊ">Experienced, Reliable & Local</h2>
+        <p class="sec-sub" style="margin-bottom:1.2rem;" data-en="We combine technical expertise with genuine commitment to customer service — making us the go-to technology partner for businesses across the region." data-am="ቴክኒካዊ ብቃትን ከእውነተኛ የደንበኛ አገልግሎት ቁርጠኝነት ጋር እናጣምራለን — ለክልሉ ንግዶች ሁሉ የሚሄዱበት የቴክኖሎጂ አጋር እናደርገናል።">We combine technical expertise with genuine commitment to customer service — making us the go-to technology partner for businesses across the region.</p>
+        <div class="why-list">
+          <div class="why-item">
+            <div class="why-num">01</div>
+            <div>
+              <h4 data-en="Certified Technicians" data-am="የተረጋገጡ ቴክኒሻኖች">Certified Technicians</h4>
+              <p data-en="Our engineers are trained professionals with hands-on expertise across hardware, software, and networking." data-am="መሐንዲሶቻችን በሃርድዌር፣ ሶፍትዌር እና ኔትወርክ ልምድ ያላቸው የሰለጠኑ ባለሙያዎች ናቸው።">Our engineers are trained professionals with hands-on expertise across hardware, software, and networking.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">02</div>
+            <div>
+              <h4 data-en="Fast Turnaround" data-am="ፈጣን አፈጻጸም">Fast Turnaround</h4>
+              <p data-en="We understand downtime costs money. Most repairs are completed same-day or within 24 hours." data-am="ጊዜ ሳያጡ ገንዘብ ያስፈርጃል። አብዛኛዎቹ ጥገናዎች በዚያው ቀን ወይም ውስጥ 24 ሰዓት ይጠናቀቃሉ።">We understand downtime costs money. Most repairs are completed same-day or within 24 hours.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">03</div>
+            <div>
+              <h4 data-en="Transparent Pricing" data-am="ግልጽ የዋጋ አሰጣጥ">Transparent Pricing</h4>
+              <p data-en="No hidden fees. You get a clear quote before any work begins — always." data-am="ምንም ተደብቆ ክፍያ የለም። ማንኛውም ሥራ ከመጀመሩ በፊት ግልጽ ዋጋ ያገኛሉ — ሁልጊዜ።">No hidden fees. You get a clear quote before any work begins — always.</p>
+            </div>
+          </div>
+          <div class="why-item">
+            <div class="why-num">04</div>
+            <div>
+              <h4 data-en="After-Sales Support" data-am="ከሽያጭ በኋላ ድጋፍ">After-Sales Support</h4>
+              <p data-en="Every service comes with follow-up support. We're not done until you're fully satisfied." data-am="እያንዳንዱ አገልግሎት ክትትል ያለው ድጋፍ አለው። እርስዎ ሙሉ በሙሉ እስኪረኩ ድረስ አናቆምም።">Every service comes with follow-up support. We're not done until you're fully satisfied.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="why-panel">
+        <div class="why-panel-grid">
+          <div class="why-stat"><div class="big">500+</div><div class="sm" data-en="Happy Clients" data-am="ደስተኛ ደንበኞች">Happy Clients</div></div>
+          <div class="why-stat"><div class="big">10+</div><div class="sm" data-en="Years in Business" data-am="ዓመታት በሥራ">Years in Business</div></div>
+          <div class="why-stat"><div class="big">6</div><div class="sm" data-en="Core Services" data-am="ዋና አገልግሎቶች">Core Services</div></div>
+          <div class="why-stat"><div class="big">24/7</div><div class="sm" data-en="Phone Support" data-am="የስልክ ድጋፍ">Phone Support</div></div>
+        </div>
+        <div class="why-quote" data-en='"Your technology partner, built on trust."' data-am='"የቴክኖሎጂ አጋርዎ፣ በእምነት ላይ የተመሠረተ።"'>"Your technology partner, built on trust."</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="sec-max">
+    <div class="sec-head">
+      <div class="sec-tag" data-en="Get In Touch" data-am="ያግኙን">Get In Touch</div>
+      <h2 class="sec-title" data-en="Contact Us Today" data-am="ዛሬ ያግኙን">Contact Us Today</h2>
+      <p class="sec-sub" data-en="Have a device that needs fixing? Need a quote for a CCTV installation? Reach out — we respond fast." data-am="የሚጠገን መሣሪያ አለዎት? ለ CCTV ጭነት ዋጋ ይፈልጋሉ? ያግኙን — በፍጥነት ምላሽ እንሰጣለን።">Have a device that needs fixing? Need a quote for a CCTV installation? Reach out — we respond fast.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="cinfo">
+        <div class="cinfo-item">
+          <div class="cinfo-icon">📞</div>
+          <div>
+            <h4 data-en="Phone / WhatsApp" data-am="ስልክ / ዋትስአፕ">Phone / WhatsApp</h4>
+            <a href="tel:0933609978">0933 609 978</a>
+          </div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">🕐</div>
+          <div>
+            <h4 data-en="Business Hours" data-am="የሥራ ሰዓታት">Business Hours</h4>
+            <p data-en="Monday – Saturday: 8:00 AM – 7:00 PM" data-am="ሰኞ – ቅዳሜ: ከጠዋቱ 2:00 – ከምሽቱ 1:00">Monday – Saturday: 8:00 AM – 7:00 PM</p>
+          </div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">📍</div>
+          <div>
+            <h4 data-en="Location" data-am="አድራሻ">Location</h4>
+            <p data-en="Available for on-site visits across the region" data-am="በክልሉ ውስጥ በቦታ ጉብኝቶች ይገኛሉ">Available for on-site visits across the region</p>
+          </div>
+        </div>
+        <div class="cinfo-item">
+          <div class="cinfo-icon">🔧</div>
+          <div>
+            <h4 data-en="Services" data-am="አገልግሎቶች">Services</h4>
+            <p data-en="Repair & Sales · CCTV · Networking · IT Support" data-am="ጥገና እና ሽያጭ · CCTV · ኔትወርክ · IT ድጋፍ">Repair & Sales · CCTV · Networking · IT Support</p>
+          </div>
+        </div>
+      </div>
+      <form class="cform" onsubmit="handleSubmit(event)">
+        <div class="cform-row">
+          <input type="text" id="inp-name" placeholder="Your Name" required>
+          <input type="tel" id="inp-phone" placeholder="Phone Number" required>
+        </div>
+        <input type="text" id="inp-service" placeholder="Service Needed (e.g. CCTV Install, Laptop Repair)">
+        <textarea id="inp-msg" placeholder="Describe your issue or request..."></textarea>
+        <button type="submit" data-en="Send Message →" data-am="መልእክት ላክ →">Send Message →</button>
+        <p id="form-msg" style="font-size:0.85rem;color:#16a34a;display:none;text-align:center;margin-top:4px;" data-en="✓ Message sent! We'll call you shortly." data-am="✓ መልእክት ተልኳል! በቅርቡ እንደውልዎታለን።">✓ Message sent! We'll call you shortly.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <div style="display:flex;align-items:center;gap:10px;">
+        <div style="width:36px;height:36px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center;font-family:'Syne',sans-serif;font-weight:800;font-size:16px;color:white;">R</div>
+        <div style="font-family:'Syne',sans-serif;font-size:0.9rem;font-weight:700;">Mohamed & Robin<span style="display:block;font-size:0.6rem;font-weight:400;color:rgba(255,255,255,0.4);letter-spacing:1.5px;text-transform:uppercase;" data-en="Technology Services" data-am="የቴክኖሎጂ አገልግሎቶች">Technology Services</span></div>
+      </div>
+      <p data-en="Trusted technology repair and sales specialists. Serving individuals and businesses with quality, speed, and integrity." data-am="የታመኑ የቴክኖሎጂ ጥገና እና ሽያጭ ስፔሻሊስቶች። ለግለሰቦች እና ለንግዶች በጥራት፣ ፍጥነት እና ታማኝነት አገልግሎት እንሰጣለን።">Trusted technology repair and sales specialists. Serving individuals and businesses with quality, speed, and integrity.</p>
+      <div class="f-phone"><a href="tel:0933609978">📞 0933 609 978</a></div>
+    </div>
+    <div>
+      <h5 data-en="Services" data-am="አገልግሎቶች">Services</h5>
+      <ul>
+        <li><a href="#services" data-en="CCTV Installation" data-am="CCTV ጭነት">CCTV Installation</a></li>
+        <li><a href="#services" data-en="Computer Repair" data-am="የኮምፒዩተር ጥገና">Computer Repair</a></li>
+        <li><a href="#services" data-en="Printer Services" data-am="የፕሪንተር አገልግሎቶች">Printer Services</a></li>
+        <li><a href="#services" data-en="Networking" data-am="ኔትወርክ">Networking</a></li>
+        <li><a href="#services" data-en="IT Support" data-am="IT ድጋፍ">IT Support</a></li>
+      </ul>
+    </div>
+    <div>
+      <h5 data-en="Company" data-am="ኩባንያ">Company</h5>
+      <ul>
+        <li><a href="#why" data-en="About Us" data-am="ስለ እኛ">About Us</a></li>
+        <li><a href="#contact" data-en="Contact" data-am="ያግኙን">Contact</a></li>
+        <li><a href="tel:0933609978" data-en="Get a Quote" data-am="ዋጋ ያግኙ">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p data-en="© 2025 Mohamed and Robin Technology Services. All rights reserved." data-am="© 2025 ሙሐመድ እና ሮቢን የቴክኖሎጂ አገልግሎቶች። መብቱ በሕግ የተጠበቀ ነው።">© 2025 Mohamed and Robin Technology Services. All rights reserved.</p>
+    <p data-en="Repair & Sales · CCTV · Computers · Printers" data-am="ጥገና እና ሽያጭ · CCTV · ኮምፒዩተሮች · ፕሪንተሮች">Repair & Sales · CCTV · Computers · Printers</p>
+  </div>
+</footer>
+
+<script>
+const translations = {
+  en: { name: 'Your Name', phone: 'Phone Number', service: 'Service Needed (e.g. CCTV Install, Laptop Repair)', msg: 'Describe your issue or request...' },
+  am: { name: 'ስምዎ', phone: 'ስልክ ቁጥር', service: 'የሚፈልጉት አገልግሎት (ለምሳሌ CCTV ጭነት፣ ላፕቶፕ ጥገና)', msg: 'ችግርዎን ወይም ጥያቄዎን ይግለጹ...' }
+};
+
+function setLang(lang) {
+  document.body.classList.toggle('lang-am', lang === 'am');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.getElementById('btn-am').classList.toggle('active', lang === 'am');
+
+  document.querySelectorAll('[data-en]').forEach(el => {
+    const val = el.getAttribute('data-' + lang);
+    if (!val) return;
+    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+      el.placeholder = val;
+    } else {
+      el.innerHTML = val;
+    }
+  });
+
+  const t = translations[lang];
+  document.getElementById('inp-name').placeholder = t.name;
+  document.getElementById('inp-phone').placeholder = t.phone;
+  document.getElementById('inp-service').placeholder = t.service;
+  document.getElementById('inp-msg').placeholder = t.msg;
+
+  document.documentElement.lang = lang === 'am' ? 'am' : 'en';
+}
+
+function handleSubmit(e) {
+  e.preventDefault();
+  const msg = document.getElementById('form-msg');
+  msg.style.display = 'block';
+  e.target.reset();
+  setTimeout(() => { msg.style.display = 'none'; }, 5000);
+}
+</script>
+</body>
+</html>
